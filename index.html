@@ -16,7 +16,7 @@
             text-align: center;
             padding: 20px;
             opacity: 0; /* Start with invisible */
-            animation: fadeIn 3s forwards; /* Apply fade-in animation */
+            animation: fadeIn 1s forwards; /* Apply fade-in animation */
         }
         @keyframes fadeIn {
         from {
@@ -106,12 +106,93 @@ a{
     width:300px;
 }
     </style>
+            
+            <style>
+                #uv-address{
+                  font-family: 'Press Start 2P';
+          color: white;
+          background-color: rgb(64, 64, 64);
+          height: 50px;
+          width: 50%;
+          border-radius: 20px;
+          cursor: pointer;
+          border: none;
+          padding: 5px;
+          box-shadow: 0 0 10px rgb(64, 64, 64)
+                }
+               /* Full-screen overlay style */
+               #overlay {
+                   display: flex;
+                   align-items: center;
+                   justify-content: center;
+                   position: fixed;
+                   top: 0;
+                   left: 0;
+                   width: 100vw;
+                   height: 100vh;
+                   background: rgba(0, 0, 0, 0.7);
+                   color: #fff;
+                   font-family: Arial, sans-serif;
+                   z-index: 1000;
+                   visibility: visible;
+                   opacity: 1;
+                   transition: opacity 0.5s ease, visibility 0.5s ease;
+               }
+        
+               /* Hidden state for the overlay */
+               #overlay.hidden {
+                   visibility: hidden;
+                   opacity: 0;
+                   transition: opacity 0.5s ease, visibility 0.5s ease;
+               }
+        
+               .container {
+                   text-align: center;
+                   padding: 20px;
+                   background: #333;
+                   border-radius: 8px;
+                   transform: scale(1);
+                   transition: transform 0.5s ease;
+               }
+        
+               #overlay.hidden .container {
+                   transform: scale(0.8);
+               }
+        
+               p {
+                   font-size: 18px;
+                   margin-bottom: 20px;
+               }
+        
+               button {
+                   padding: 10px 20px;
+                   font-size: 16px;
+                   border: none;
+                   border-radius: 4px;
+                   background: #555;
+                   color: #fff;
+                   cursor: pointer;
+                   margin: 0 10px;
+                   transition: background-color 0.3s, color 0.3s;
+                   box-shadow: 0 0 10px  #3f3f3f;
+               }
+        
+               button:hover {
+                   background: #777;
+               }
+           </style>
 </head>
 <body>
-    <audio autoplay loop hidden>
-        <source src="copy_86323171-6B9A-4083-8C64-358970D57238.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
+    <audio id="background-music" autoplay loop src="copy_86323171-6B9A-4083-8C64-358970D57238.mp3"></audio>
+    <div id="overlay">
+        <div class="container">
+          <p><h1>Welcome to my site!</h1></p>
+            <button onclick="proceed()">Proceed Anyway</button>
+            <br>
+            <br>
+            <button onclick="document.getElementById('background-music').play()">Play music? (recomended)</button>
+        </div>
+      </div>
   <img src="https://entertopia.vercel.app/imgs/skibiditoiletrizz.png" id="img">
   <br>
   <h1>Infamy.</h1>
@@ -278,3 +359,14 @@ a{
   </script>
 </body>
 </html>
+
+<script>
+    function proceed() {
+        var overlay = document.getElementById('overlay');
+        overlay.classList.add('hidden');
+        setTimeout(function() {
+            // Additional functionality can be added here if needed
+            // For example, redirect to a different page
+        }, 500); // Wait for the transition to finish before taking additional actions
+    }
+</script>  
