@@ -123,48 +123,54 @@ a{
           box-shadow: 0 0 10px rgb(64, 64, 64)
                 }
                /* Full-screen overlay style */
-               #overlay {
+             
+#overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  color: #ffffff;
-  font-size: 2em;
+  color: white;
+  font-size: 1.5vw;
   cursor: pointer;
   transition: opacity 1s ease;
 }
+
 #enter-text {
-  text-align: center;
-  border-color: #ffffff;
-  border: 3px solid;
-  background-color: rgb(0, 0, 0, 0.9);
-  padding: 20px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid white;
   border-radius: 10px;
-  opacity: 0.8;
-  height: 30px;
-  width: 125px;
-  font-size: 1.0em;
+  animation: pulse 2s infinite;
+  font-size: 1vw;
 }
 
            </style>
 </head>
 <body>
-    <audio id="bg-music" src="music.mp3" loop></audio>
     <div id="overlay">
-        <div id="enter-text">ENTER</div>
+        <div id="enter-text">enter</div>
     </div>
+    <video autoplay muted loop id="bg-video">
+        <source src="bg.mp4" type="video/mp4">
+    </video>
   <img src="https://entertopia.vercel.app/imgs/skibiditoiletrizz.png" id="img">
   <br>
   <h1>Infamy.</h1>
   <h2>13 year old web developer</h2>
   <div id="projects">
     <h1>Projects</h1>
+    <a href="https://starlight.vercel.app">
+        <div id="card1">
+          <h1>Starlight</h1>
+          <h3>Starlight is your all in one platform for, proxies, games, utilities and hacks</h3>
+        </div>
+        </a>
     <a href="https://entertopia.vercel.app">
     <div id="card1">
       <h1>Entertopia</h1>
@@ -202,83 +208,82 @@ a{
             <li><a href="https://x.com/enterheadlines_">Twitter</a></li>
         </ul>
     </div>
-   
+   cccccccccccvv
 <div id="particles-js"></div>
 
-  <!-- Include Particle.js library -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
-      particlesJS("particles-js", {
-          particles: {
-              number: {
-                  value: 200, // Number of particles
-                  density: {
-                      enable: true,
-                      value_area: 800
-                  }
-              },
-              color: {
-                  value: "#ffffff" // White particles to represent stars
-              },
-              shape: {
-                  type: "circle", // Circular particles
-                  stroke: {
-                      width: 0,
-                      color: "#000000"
-                  },
-              },
-              opacity: {
-                  value: 0.7, // Base opacity for brightness
-                  random: true, // Random opacity for blinking effect
-                  anim: {
-                      enable: false,
-                  }
-              },
-              size: {
-                  value: 3, // Size of particles
-                  random: true,
-                  anim: {
-                      enable: false,
-                  }
-              },
-              line_linked: {
-                  enable: false, // Disable connecting lines
-              },
-              move: {
-                  enable: true,
-                  speed: 5, // Slower speed for a more realistic flying effect
-                  direction: "none", // Particle movement direction
-                  random: true, // Random movement for a more dynamic effect
-                  straight: false,
-                  out_mode: "out",
-                  bounce: false,
-                  attract: {
-                      enable: false,
-                  }
-              }
-          },
-          interactivity: {
-              detect_on: "canvas",
-              events: {
-                  onhover: {
-                      enable: false, // Disable hover effect
-                  },
-                  onclick: {
-                      enable: false, // Disable click effect
-                  },
-                  resize: true
-              }
-          },
-          retina_detect: true
-      });
-  </script>
+ <!-- Include Particle.js library -->
+ <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+ <script>
+     particlesJS("particles-js", {
+         particles: {
+             number: {
+                 value: 200, // Number of particles
+                 density: {
+                     enable: true,
+                     value_area: 800
+                 }
+             },
+             color: {
+                 value: "#ffffff" // White particles to represent stars
+             },
+             shape: {
+                 type: "circle", // Circular particles
+                 stroke: {
+                     width: 0,
+                     color: "#000000"
+                 },
+             },
+             opacity: {
+                 value: 0.7, // Base opacity for brightness
+                 random: true, // Random opacity for blinking effect
+                 anim: {
+                     enable: false,
+                 }
+             },
+             size: {
+                 value: 3, // Size of particles
+                 random: true,
+                 anim: {
+                     enable: false,
+                 }
+             },
+             line_linked: {
+                 enable: false, // Disable connecting lines
+             },
+             move: {
+                 enable: true,
+                 speed: 5, // Slower speed for a more realistic flying effect
+                 direction: "none", // Particle movement direction
+                 random: true, // Random movement for a more dynamic effect
+                 straight: false,
+                 out_mode: "out",
+                 bounce: false,
+                 attract: {
+                     enable: false,
+                 }
+             }
+         },
+         interactivity: {
+             detect_on: "canvas",
+             events: {
+                 onhover: {
+                     enable: false, // Disable hover effect
+                 },
+                 onclick: {
+                     enable: false, // Disable click effect
+                 },
+                 resize: true
+             }
+         },
+         retina_detect: true
+     });
+ </script>
 </body>
 </html>
 
 
-
-  <script>
-        document.addEventListener('DOMContentLoaded', () => {
+<script>
+      document.addEventListener('DOMContentLoaded', () => {
             const overlay = document.getElementById('overlay');
             const content = document.querySelector('.content');
             const bgMusic = document.getElementById('bg-music');
@@ -296,4 +301,4 @@ a{
                 bgMusic.volume = e.target.value;
             });
         });
-    </script>
+</script>
