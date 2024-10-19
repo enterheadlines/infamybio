@@ -281,19 +281,23 @@ a{
 
 
 <script>
-      document.addEventListener('DOMContentLoaded', () => {
-            const overlay = document.getElementById('overlay');
-            const content = document.querySelector('.content');
-            const bgMusic = document.getElementById('bg-music');
-            const volumeControl = document.getElementById('volume-control');
+  document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('overlay');
+    const content = document.querySelector('.content');
+    const bgMusic = document.getElementById('bg-music');
 
-            overlay.addEventListener('click', () => {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                    content.style.display = 'flex';
-                    bgMusic.play();
-                }, 1000);
-            });
+    // Check if elements exist
+    if (overlay && content && bgMusic) {
+        overlay.addEventListener('click', () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                content.style.display = 'flex';
+                bgMusic.play().catch(error => {
+                    console.error('Playback failed:', error);
+                });
+            }, 1000);
         });
+    }
+});
 </script>
