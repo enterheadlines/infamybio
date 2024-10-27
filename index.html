@@ -1,179 +1,52 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Infamy.</title>
+    <title>infamy.</title>
     <style>
-         body {
-         backdrop-filter: blur(10px);
-          background-color: #111111;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            font-family: 700;
-            color: #ffffff; /* Light text color */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            opacity: 0; /* Start with invisible */
-            animation: fadeIn 1s forwards; /* Apply fade-in animation */
-        }
-        @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-        h1 {
-            font-size: 3rem;
-            margin: 10px 0;
-            color: #ffffff; /* Fire color */
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            margin: 5px 0;
-            color: #bbb; /* Lighter gray for subtitle */
-        }
-
-        #projects, #socials, #skills {
-            width: 100%;
-            max-width: 600px;
-            margin: 20px 0;
-            padding: 20px;
-   backdrop-filter: blur(10px) saturate(200%) brightness(70%);
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        #projects h1, #socials h1, #skills h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #ffffff; /* Fire color */
-        }
-
-        #projects div, #socials ul, #skills ul {
-            margin: 10px 0;
-        }
-
-        #projects div {
-            padding: 10px;
-        backdrop-filter: blur(10px) saturate(200%) brightness(70%);
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.3s; /* Add transform for hover */
-        }
-
-        #projects div:hover {
-           backdrop-filter: blur(10px) saturate(200%) brightness(70%);
-            transform: translateY(-5px); /* Lift effect */
-        }
-
-        #socials ul, #skills ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        #socials li, #skills li {
-            margin: 5px 0;
-        }
-
-        #socials a {
-            text-decoration: none;
-            color: #ffffff; /* Fire color */
-            transition: color 0.3s;
-        }
-
-        #socials a:hover {
-            color: #c1c1c1; /* Darker fire color on hover */
-        }
-
-        #particles-js {
-	height: 100vw;
-    width: 100vw;
-    position: fixed;
-    z-index: -1;
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  cursor: none;
 }
-a{
-    text-decoration: none;
-    color: white;
-}
-#img{
-    border-radius: 100%;
-    height:300px;
-    width:300px;
-}
-    </style>
-            
-            <style>
-                #uv-address{
-                  font-family: 'Press Start 2P';
-          color: white;
-          background-color: rgb(64, 64, 64);
-          height: 50px;
-          width: 50%;
-          border-radius: 20px;
-          cursor: pointer;
-          border: none;
-          padding: 5px;
-          box-shadow: 0 0 10px rgb(64, 64, 64)
-                }
-               /* Full-screen overlay style */
-             
+
 #overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  color: white;
-  font-size: 1.5vw;
+  color: #ffffff;
+  font-size: 2em;
   cursor: pointer;
-  transition: opacity 1s ease; /* Adjust the timing to match your JavaScript */
+  transition: opacity 1s ease;
 }
 
 #enter-text {
-  padding: 10px;
-  background-color: rgb(17, 17, 17);
-  border: 2px solid white;
+  text-align: center;
+  border-color: #ff00dd;
+  border: 3px solid;
+  background-color: rgb(0, 0, 0, 0.9);
+  padding: 20px;
   border-radius: 10px;
-  font-size: 2vw;
-}
-#volume-control {
-  margin-top: 10px;
-  width: 20vw;
-  -webkit-appearance: none;
-  background: black;
-  height: 5px;
-  outline: none;
+  opacity: 0.8;
+  box-shadow: 0 0 20px #ffffff, 0 0 30px #fff6ff, 0 0 40px #ffffff, 0 0 50px #ffffff;
+  height: 30px;
+  width: 125px;
+  font-size: 1.0em;
 }
 
-#volume-control::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 10px;
-  height: 10px;
-  background: white;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-#volume-control::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
-  background: white;
-  cursor: pointer;
-  border-radius: 50%;
-}
 
 .content {
   display: none;
@@ -182,191 +55,230 @@ a{
   justify-content: center;
   height: 100%;
   text-align: center;
-  color: white;
-  transition: all 0.5 ease;
+  color: #ffffff;
 }
-.volume-container {
-    width: 100%;
-            max-width: 600px;
-            margin: 20px 0;
-            padding: 20px;
-        backdrop-filter: blur(10px) saturate(200%) brightness(70%);
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+.profile-box {
+  border-color: #ffffff;
+  border: 2px solid;
+  background-color: rgb(0, 0, 0, 0.9);
+  padding: 20px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all 0.5 ease;
+  animation: fadeInUp 1s ease forwards;
+  transform: translateY(20px);
+  opacity: 0;
+  box-shadow: 0 0 20px #ffffff, 0 0 30px #ffffff, 0 0 40px #ffffff, 0 0 50px #ffffff;
+}
+
+@keyframes fadeInUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#profile-pic {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+  transition: transform 0.5s ease;
+}
+
+#profile-pic:hover {
+  transform: scale(1.1);
+}
+
+#username {
+  font-size: 2em;
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+  background-size: 400%;
+  -webkit-background-clip: text;
+  animation: rainbow 3s linear infinite;
+  z-index: 9999;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  cursor: none;
+}
+
+.link {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+  border: 2px solid #ffffff;
+  margin-bottom: 5px;
+  cursor: none;
+}
+
+.link:hover {
+  background-color: #cecece(255, 255, 255, 0.2);
+  border-color: #c1c1c1;
+  transform: scale(1.05);
+  cursor: none;
+}
+
+#volume-control {
+  margin-top: 20px;
+  width: 200px;
+  -webkit-appearance: none;
+  background: #ff00dd;
+  height: 5px;
+  outline: none;
+  cursor: none;
+}
+
+#volume-control::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #ff00dd;
+  cursor: pointer;
+  border-radius: 50%;
+  cursor: none;
+}
+
+#volume-control::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #ff00dd;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.volume-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .volume-label {
-  color: white;
+  color: #ff00dd;
   margin-top: 10px;
-  font-size: 1vw;
 }
-           </style>
+* {
+  cursor: none; /* Hide the cursor on all elements */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.custom-cursor {
+  position: absolute;
+  width: 20px; /* Medium size dot */
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255, 0.8); /* Glowing pink dot */
+  box-shadow: 0 0 15px rgb(255, 255, 255, 0.8), 0 0 30px rgb(255, 255, 255, 0.6); 
+  animation: blink 1s infinite;
+  pointer-events: none; /* Prevent the cursor from interfering with interactions */
+  transition: transform 0.1s ease;
+}
+
+@keyframes blink {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+    </style>
 </head>
 <body>
     <div id="overlay">
-        <div id="enter-text">enter</div>
+        <div id="enter-text">ENTER</div>
     </div>
-<audio id="bg-music" src="music.mp3" loop></audio>
-<div class="content">
-  <img src="https://entertopia.vercel.app/imgs/skibiditoiletrizz.png" id="img">
-  <br>
-  <h1>Infamy.</h1>
-  <h2>13 year old web developer</h2>
-  <div id="projects">
-    <h1>Projects</h1>
-    <a href="https://starlight.vercel.app">
-        <div id="card1">
-          <h1>Starlight</h1>
-          <h3>Starlight is your all in one platform for, proxies, games, utilities and hacks</h3>
+    <div class="content">
+        <div class="profile-box">
+            <div class="profile">
+                <img src="pfp.jpg" alt="Profile Picture" id="profile-pic">
+                <h1 id="username">Infamy/Enterheadlines</h1>
+            </div>
+            <p id="p1">13 year old html/css/js web developer</p>
+            <p id="p1">projects</p>
+            <div class="links">
+                <a href="https://starlighttt.netlify.app" class="link">Starlight</a>
+                <a href="https://entertopia.vercel.app" class="link">Entertopia</a>
+                <a href="https://entsearch.vercel.app" class="link">Entsearch</a>
+                <a href="https:// .app" class="link">JS Terminal</a>
+            </div> <br>
+            <p id="p1">social medias</p>
+            <div class="links">
+                <a href="https://www.youtube.com/@erdhle" class="link">youtube</a>
+                <a href="https://tiktok.com/@enterheadlines" class="link">tiktok</a>
+                <a href="https://github.com/enterheadlines" class="link">github</a><br>
+                <a href="https://www.instagram.com/enterheadlines/" class="link">instagram</a>
+                <a href="https://www.x.com/enterheadlines_/" class="link">twitter</a>
+                <a href="https://www.snapchat.com/add/enterheadlines" class="link">snapchat</a>
+            </div>
+            <div class="volume-container">
+                <input type="range" id="volume-control" min="0" max="1" step="0.01" value="1">
+                <label for="volume-control" class="volume-label">Volume</label>
+            </div>
         </div>
-        </a>
-    <a href="https://entertopia.vercel.app">
-    <div id="card1">
-      <h1>Entertopia</h1>
-      <h3>Entertopia is a unblocked gaming website, currently hosting over 140 games, 23 apps and 63 ROMs.</h3>
-    </div>
-    </a>
-    <a href="https://entertopia.vercel.app/projects/entsearch/entsearch.html">
-    <div id="card2">
-      <h1>Entsearch</h1>
-      <h3>Entsearch is a simple search engine using the CSE api</h3>
-    </div>
-    </a>
-    <a href="https://entertopia.vercel.app/projects/Infstore/infstore.html">
-    <div id="card4">
-      <h1>Infstore</h1>
-       <h3>Infstore is an innovative platform designed to provide users with access to a wide variety of games, applications, and utilities, all available for download in an unblocked format.</h3>
-    </div>
-    </a>
-    </div>
-    <div id="socials">
-        <h1>Socials</h1>
-        <ul>
-            <li><a href="https://discord.gg/WSUy3dHFRh">Youtube</a></li>
-            <li><a href="https://github.com/enterheadlines/">Github</a></li>
-            <li><a href="https://www.youtube.com/@erhdle">Youtube</a></li>
-            <li><a href="https://tiktok.com/@enterheadlines">Tiktok</a></li>
-            <li><a href="https://www.instagram.com/enterheadlines/">Instagram</a></li>
-            <li><a href="https://www.snapchat.com/add/enterheadlines">Snapchat</a></li>
-            <li><a href="https://x.com/enterheadlines_">Twitter</a></li>
-        </ul>
-    </div>
-    <div id="socials">
-        <h1>Skills</h1>
-        <ul>
-          <li>HTML</li>
-          <li>CSS</li>
-          <li>JS</li>
-          <li>lil bit of php</li>
-        </ul>
-    </div>
-    <div class="volume-container">
-        <input type="range" id="volume-control" min="0" max="1" step="0.01" value="1">
-        <label for="volume-control" class="volume-label">Volume</label>
-    </div>
-    </div>
-<div id="particles-js"></div>
 
- <!-- Include Particle.js library -->
- <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
- <script>
-     particlesJS("particles-js", {
-         particles: {
-             number: {
-                 value: 200, // Number of particles
-                 density: {
-                     enable: true,
-                     value_area: 800
-                 }
-             },
-             color: {
-                 value: "#ffffff" // White particles to represent stars
-             },
-             shape: {
-                 type: "circle", // Circular particles
-                 stroke: {
-                     width: 0,
-                     color: "#000000"
-                 },
-             },
-             opacity: {
-                 value: 0.7, // Base opacity for brightness
-                 random: true, // Random opacity for blinking effect
-                 anim: {
-                     enable: false,
-                 }
-             },
-             size: {
-                 value: 3, // Size of particles
-                 random: true,
-                 anim: {
-                     enable: false,
-                 }
-             },
-             line_linked: {
-                 enable: false, // Disable connecting lines
-             },
-             move: {
-                 enable: true,
-                 speed: 5, // Slower speed for a more realistic flying effect
-                 direction: "none", // Particle movement direction
-                 random: true, // Random movement for a more dynamic effect
-                 straight: false,
-                 out_mode: "out",
-                 bounce: false,
-                 attract: {
-                     enable: false,
-                 }
-             }
-         },
-         interactivity: {
-             detect_on: "canvas",
-             events: {
-                 onhover: {
-                     enable: false, // Disable hover effect
-                 },
-                 onclick: {
-                     enable: false, // Disable click effect
-                 },
-                 resize: true
-             }
-         },
-         retina_detect: true
-     });
- </script>
+        <audio id="bg-music" src="music.mp3" loop></audio>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.getElementById('overlay');
+            const content = document.querySelector('.content');
+            const bgMusic = document.getElementById('bg-music');
+            const volumeControl = document.getElementById('volume-control');
+
+            overlay.addEventListener('click', () => {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    content.style.display = 'flex';
+                    bgMusic.play();
+                }, 1000);
+            });
+            volumeControl.addEventListener('input', (e) => {
+                bgMusic.volume = e.target.value;
+            });
+        });
+    </script>
 </body>
 </html>
-
-
-<script>
- document.addEventListener('DOMContentLoaded', () => {
-    const overlay = document.getElementById('overlay');
-    const content = document.querySelector('.content');
-    const bgMusic = document.getElementById('bg-music');
-    const volumeControl = document.getElementById('volume-control');
-
-    // Check if elements exist
-    if (overlay && content && bgMusic && volumeControl) {
-        overlay.addEventListener('click', () => {
-            overlay.style.opacity = '0';
-            setTimeout(() => {
-                overlay.style.display = 'none'; // Hide the overlay
-                content.style.display = 'inline-block'; // Show the content
-                bgMusic.play().catch(error => {
-                    console.error('Playback failed:', error);
-                });
-            }, 1000); // Wait for the opacity transition to complete
-        });
-
-        volumeControl.addEventListener('input', (e) => {
-            bgMusic.volume = e.target.value; // Adjust volume based on input
-        });
-    } else {
-        console.error('One or more elements are missing in the DOM.');
-    }
-});
-</script>
