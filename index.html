@@ -18,7 +18,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
+  overflow: scroll;
   font-family: 'Inter', sans-serif;
 }
 
@@ -201,29 +201,6 @@ body {
   background-color: #828282;
 }
 
-.custom-cursor {
-  position: absolute;
-  width: 20px; /* Medium size dot */
-  height: 20px;
-  border-radius: 50%;
-  background-color: rgb(255, 255, 255, 0.8); /* Glowing pink dot */
-  box-shadow: 0 0 15px rgb(255, 255, 255, 0.8), 0 0 30px rgb(255, 255, 255, 0.6); 
-  animation: blink 1s infinite;
-  pointer-events: none; /* Prevent the cursor from interfering with interactions */
-  transition: transform 0.1s ease;
-}
-
-@keyframes blink {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 1;
-  }
-}
-
 button {
     height: 25px;
     width: 60px;
@@ -242,7 +219,7 @@ button {
                 <img src="https://entertopia.vercel.app/imgs/skibiditoiletrizz.png" alt="Profile Picture" id="profile-pic">
                 <h1 id="username">Infamy/Enterheadlines</h1>
             </div>
-            <p id="p1">13 year old html/css/js web developer</p>
+            <p id="p1">13 year old web developer</p>
             <p id="p1">projects</p>
             <div class="links">
                 <a href="https://starlighttt.netlify.app" class="link">Starlight</a>
