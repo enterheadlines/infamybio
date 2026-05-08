@@ -1,424 +1,297 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>infamy.</title>
-    <link rel="icon" href="https://entertopia.vercel.app/imgs/skibiditoiletrizz.png">
+<link rel="icon" href="https://entertopia.vercel.app/imgs/skibiditoiletrizz.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
-        /* Reset & Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: none !important; /* Hide default cursor everywhere */
-            user-select: none;
-            font-family: 'Inter', sans-serif;
-        }
+.custom-cursor {
+  position: absolute;
+  width: 20px; /* Medium size dot */
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255, 0.8); /* Glowing pink dot */
+  box-shadow: 0 0 15px rgb(255, 255, 255, 0.8), 0 0 30px rgb(255, 255, 255, 0.6); 
+  animation: blink 1s infinite;
+  pointer-events: none; /* Prevent the cursor from interfering with interactions */
+  transition: transform 0.1s ease;
+}
 
-        body, html {
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            background-color: #050505;
-            color: #ffffff;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+body,
+html {
+user-select: none;
+    background-image: url(infamyy.gif);
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: scroll;
+  font-family: 'Inter', sans-serif;
+}
 
-        /* Dynamic Background */
-        .bg-element {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-            animation: float 20s infinite alternate cubic-bezier(0.5, 0, 0.5, 1);
-        }
-        .bg-1 { width: 40vw; height: 40vw; background: #ff005533; top: -10%; left: -10%; }
-        .bg-2 { width: 50vw; height: 50vw; background: #4000ff33; bottom: -20%; right: -10%; animation-delay: -5s; }
-        .bg-3 { width: 30vw; height: 30vw; background: #00f2fe22; top: 40%; left: 40%; animation-delay: -10s; }
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  color: #ffffff;
+  font-size: 2em;
+  cursor: pointer;
+  transition: opacity 1s ease;
+}
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(10vw, 15vh) scale(1.2); }
-        }
+#enter-text {
+  text-align: center;
+  border-color: #ff00dd;
+  border: 3px solid;
+  background-color: rgb(0, 0, 0, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  opacity: 0.8;
+  box-shadow: 0 0 20px #ffffff, 0 0 30px #fff6ff, 0 0 40px #ffffff, 0 0 50px #ffffff;
+  height: 30px;
+  width: 125px;
+  font-size: 1.0em;
+}
 
-        /* Entrance Overlay */
-        #overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #050505;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            transition: opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1), transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
-        }
 
-        #enter-text {
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 0.5em;
-            color: #fff;
-            padding: 20px 40px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
+.content {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #ffffff;
+}
 
-        #enter-text::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s ease;
-            z-index: -1;
-        }
+.profile-box {
+  border-color: #ffffff;
+  border: 2px solid;
+  background-color: rgba(34, 34, 34, 0);
+  backdrop-filter: blur(10px) saturate(200%) brightness(70%);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInUp 1s ease forwards;
+  transform: translateY(20px);
+  opacity: 0;
+  box-shadow: 0 0 20px #ffffff, 0 0 30px #ffffff, 0 0 40px #ffffff, 0 0 50px #ffffff;
+}
 
-        #enter-text:hover {
-            color: #000;
-            border-color: #fff;
-            transform: scale(1.05);
-        }
+@keyframes fadeInUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
-        #enter-text:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
+#profile-pic {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+  transition: transform 0.5s ease;
+}
 
-        /* Main Content Grid */
-        .content {
-            display: none; /* Handled by JS */
-            height: 100%;
-            width: 100%;
-            align-items: center;
-            justify-content: center;
-            perspective: 1000px; /* For 3D tilt */
-        }
+#profile-pic:hover {
+  transform: scale(1.1);
+}
 
-        .profile-card {
-            background: rgba(20, 20, 20, 0.4);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 30px;
-            padding: 50px 40px;
-            width: 90%;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            opacity: 0;
-            transform: translateY(40px);
-            animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            transition: transform 0.1s ease-out; /* For JS tilt */
-            transform-style: preserve-3d;
-        }
+#username {
+  font-size: 2em;
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+  background-size: 400%;
+  -webkit-background-clip: text;
+  animation: rainbow 3s linear infinite;
+  z-index: 9999;
+}
 
-        @keyframes revealUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
 
-        /* Profile Elements */
-        #profile-pic {
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 2px solid rgba(255,255,255,0.1);
-            transform: translateZ(30px); /* 3D pop */
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+  50% {
+    background-position: 100% 50%;
+  }
 
-        #profile-pic:hover {
-            transform: translateZ(50px) scale(1.1);
-        }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
-        #username {
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            margin-bottom: 5px;
-            background: linear-gradient(120deg, #ffffff, #a8a8a8, #ffffff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 4s linear infinite;
-            transform: translateZ(20px);
-        }
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  cursor: none;
+}
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
+.link {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+  border: 2px solid #ffffff;
+  margin-bottom: 5px;
+  cursor: none;
+}
 
-        .subtitle {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: #888;
-            margin-bottom: 30px;
-            transform: translateZ(10px);
-        }
+.link:hover {
+  background-color: #cecece(255, 255, 255, 0.2);
+  border-color: #c1c1c1;
+  transform: scale(1.05);
+  cursor: none;
+}
 
-        .section-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #555;
-            margin: 20px 0 10px 0;
-            width: 100%;
-            text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 5px;
-        }
+#volume-control {
+  margin-top: 20px;
+  width: 200px;
+  -webkit-appearance: none;
+  background: #ffffff;
+  height: 5px;
+  outline: none;
+  cursor: none;
+}
 
-        /* Links */
-        .links-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: flex-start;
-            width: 100%;
-            transform: translateZ(15px);
-        }
+#volume-control::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #ffffff;
+  cursor: pointer;
+  border-radius: 50%;
+  cursor: none;
+}
 
-        .link {
-            text-decoration: none;
-            color: #ccc;
-            font-size: 0.9rem;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 50px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+#volume-control::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #ffffff;
+  cursor: pointer;
+  border-radius: 50%;
+}
 
-        .link:hover {
-            background: #ffffff;
-            color: #000000;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
-            font-weight: 700;
-        }
+.volume-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-        /* Audio Control */
-        .volume-container {
-            margin-top: 40px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            transform: translateZ(10px);
-        }
+.volume-label {
+  color: #ffffff;
+  margin-top: 10px;
+}
+* {
+  cursor: none; /* Hide the cursor on all elements */
+}
 
-        .volume-label {
-            font-size: 0.75rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #828282;
+}
 
-        #volume-control {
-            flex-grow: 1;
-            -webkit-appearance: none;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            outline: none;
-        }
-
-        #volume-control::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            background: #ffffff;
-            border-radius: 50%;
-            transition: transform 0.2s;
-        }
-
-        #volume-control::-webkit-slider-thumb:hover {
-            transform: scale(1.5);
-        }
-
-        /* Advanced Custom Cursor */
-        .cursor-dot {
-            width: 6px;
-            height: 6px;
-            background: #fff;
-            border-radius: 50%;
-            position: fixed;
-            top: 0; left: 0;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-        }
-
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            position: fixed;
-            top: 0; left: 0;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background 0.2s;
-        }
-
-        /* Link hover effect for cursor */
-        .cursor-hover .cursor-outline {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            border-color: transparent;
-        }
+button {
+    height: 25px;
+    width: 60px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
     </style>
 </head>
 <body>
-
-    <!-- Animated Background Elements -->
-    <div class="bg-element bg-1"></div>
-    <div class="bg-element bg-2"></div>
-    <div class="bg-element bg-3"></div>
-
-    <!-- Custom Cursor Elements -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
     <div id="overlay">
         <div id="enter-text">ENTER</div>
     </div>
-
     <div class="content">
-        <div class="profile-card" id="card">
-            <img src="infamy.webp" alt="Profile Picture" id="profile-pic" onerror="this.src='https://via.placeholder.com/120/1a1a1a/ffffff?text=I'">
-            <h1 id="username">Infamy.</h1>
-            <p class="subtitle">Frontend Developer</p>
-            
-            <div class="section-label">Projects</div>
-            <div class="links-grid">
+        <div class="profile-box">
+            <div class="profile">
+                <img src="infamy.webp" alt="Profile Picture" id="profile-pic">
+                <h1 id="username">Infamy</h1>
+            </div>
+            <p id="p1">frontend developer</p>
+            <p id="p1">projects</p>
+            <div class="links">
                 <a href="https://starlighttt.netlify.app" class="link">Starlight</a>
                 <a href="https://entertopia.vercel.app" class="link">Entertopia</a>
+                </div>
+                <div class="links">
                 <a href="https://js-terminall.netlify.app/" class="link">JS Terminal</a>
+                </div>
+     <br>
+            <p id="p1">social medias</p>
+            <div class="links">
+                <a href="https://www.youtube.com/@erdhle" class="link">youtube</a>
+                <a href="https://tiktok.com/@enterheadlines" class="link">tiktok</a>
+                <a href="https://github.com/enterheadlines" class="link">github</a><br>
             </div>
-            
-            <div class="section-label">Socials</div>
-            <div class="links-grid">
-                <a href="https://www.youtube.com/@erdhle" class="link">YouTube</a>
-                <a href="https://tiktok.com/@enterheadlines" class="link">TikTok</a>
-                <a href="https://github.com/enterheadlines" class="link">GitHub</a>
-                <a href="https://www.instagram.com/infamy__studios/" class="link">Instagram</a>
-                <a href="https://www.x.com/enterheadlines_/" class="link">Twitter</a>
-                <a href="https://www.snapchat.com/add/enterheadlines" class="link">Snapchat</a>
-            </div>
-
+                <div class="links">
+                <a href="https://www.instagram.com/infamy__studios/" class="link">instagram</a>
+                <a href="https://www.x.com/enterheadlines_/" class="link">twitter</a>
+                <a href="https://www.snapchat.com/add/enterheadlines" class="link">snapchat</a>
+                </div>
             <div class="volume-container">
-                <span class="volume-label">Audio</span>
                 <input type="range" id="volume-control" min="0" max="1" step="0.01" value="1">
+                <label for="volume-control" class="volume-label">Volume</label>
             </div>
         </div>
+ <div class="custom-cursor"></div>
+
         <audio id="bg-music" src="musicc.mp3" loop></audio>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // -- Entrance Logic --
             const overlay = document.getElementById('overlay');
             const content = document.querySelector('.content');
             const bgMusic = document.getElementById('bg-music');
             const volumeControl = document.getElementById('volume-control');
 
             overlay.addEventListener('click', () => {
-                overlay.style.transform = 'scale(1.1)';
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.style.display = 'none';
                     content.style.display = 'flex';
-                    bgMusic.play().catch(e => console.log("Audio play blocked until interaction."));
-                }, 800); // Wait for transition
+                    bgMusic.play();
+                }, 1000);
             });
-
             volumeControl.addEventListener('input', (e) => {
                 bgMusic.volume = e.target.value;
-            });
-
-            // -- Advanced Custom Cursor Logic --
-            const cursorDot = document.querySelector('.cursor-dot');
-            const cursorOutline = document.querySelector('.cursor-outline');
-            
-            let mouseX = 0;
-            let mouseY = 0;
-            let outlineX = 0;
-            let outlineY = 0;
-
-            window.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                // Instant follow for the dot
-                cursorDot.style.left = `${mouseX}px`;
-                cursorDot.style.top = `${mouseY}px`;
-            });
-
-            // Smooth trailing effect for the outline using requestAnimationFrame
-            const animateCursor = () => {
-                let distX = mouseX - outlineX;
-                let distY = mouseY - outlineY;
-                
-                // Speed of the trailing effect (0.15 is smooth)
-                outlineX = outlineX + (distX * 0.15);
-                outlineY = outlineY + (distY * 0.15);
-
-                cursorOutline.style.left = `${outlineX}px`;
-                cursorOutline.style.top = `${outlineY}px`;
-
-                requestAnimationFrame(animateCursor);
-            };
-            animateCursor();
-
-            // Hover interactions for cursor
-            const interactiveElements = document.querySelectorAll('a, #enter-text, input, #profile-pic');
-            interactiveElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    document.body.classList.add('cursor-hover');
-                });
-                el.addEventListener('mouseleave', () => {
-                    document.body.classList.remove('cursor-hover');
-                });
-            });
-
-            // -- 3D Tilt Effect on Profile Card --
-            const card = document.getElementById('card');
-            
-            document.addEventListener('mousemove', (e) => {
-                // Only apply tilt if the card is visible
-                if(content.style.display !== 'flex') return;
-
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-            });
-
-            // Reset tilt when mouse leaves window
-            document.addEventListener('mouseleave', () => {
-                card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-                card.style.transition = `transform 0.5s ease`;
-            });
-            
-            document.addEventListener('mouseenter', () => {
-                card.style.transition = `transform 0.1s ease-out`;
             });
         });
     </script>
 </body>
 </html>
+<script>
+document.addEventListener('mousemove', (e) => {
+  const cursor = document.querySelector('.custom-cursor');
+  const cursorSize = cursor.offsetWidth / 2; // Half of the cursor size for centering
+  cursor.style.left = (e.pageX - cursorSize) + 'px';
+  cursor.style.top = (e.pageY - cursorSize) + 'px';
+});
+</script>
